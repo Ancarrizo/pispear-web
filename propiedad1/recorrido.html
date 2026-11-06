@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorrido 360° - PispeAR</title>
+    
+    <!-- Librería Visor Pannellum CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #0b1120; }
+        #panorama { width: 100vw; height: 100vh; }
+
+        /* ESTILO DE OJITOS DE BÚHO PISPEAR */
+        .pnlm-hotspot-base {
+            width: 38px !important;
+            height: 38px !important;
+            margin-left: -19px !important;
+            margin-top: -19px !important;
+            background-color: rgba(15, 23, 42, 0.9) !important;
+            border: 2px solid #ffffff !important;
+            border-radius: 50% !important;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5) !important;
+            cursor: pointer;
+        }
+
+        .pnlm-hotspot-base::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background-color: #00ffcc;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .pnlm-hotspot-base:hover {
+            transform: scale(1.2);
+            border-color: #00ffcc !important;
+        }
+
+        /* Botón Flotante para Volver a la Web Principal */
+        .btn-volver {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.85);
+            color: #00ffcc;
+            border: 1px solid #00ffcc;
+            padding: 10px 18px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+        }
+
+        .btn-volver:hover {
+            background: #00ffcc;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Enlace para regresar a la Landing Page -->
+    <a href="../index.html" class="btn-volver">&larr; Volver a PispeAR</a>
+
+    <!-- Contenedor del Visor 360 -->
+    <div id="panorama"></div>
+
+    <script>
+        pannellum.viewer('panorama', {
+            "default": {
+                "firstScene": "entrada",
+                "sceneFadeDuration": 1000,
+                "autoLoad": true
+            },
+            "scenes": {
+                "entrada": {
+                    "title": "Entrada",
+                    "type": "equirectangular",
+                    "panorama": "entrada.jpg",
+                    "yaw": 0,
+                    "hotSpots": [
+                        {
+                            "pitch": -5, "yaw": 90,
+                            "type": "scene",
+                            "text": "Ir al Living",
+                            "sceneId": "living"
+                        },
+                        {
+                            "pitch": -5, "yaw": 185,
+                            "type": "scene",
+                            "text": "Ir al Pasillo",
+                            "sceneId": "pasillo1"
+                        }
+                    ]
+                },
+                "living": {
+                    "title": "Living Comedor",
+                    "type": "equirectangular",
+                    "panorama": "living.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -5, "yaw": -90,
+                            "type": "scene",
+                            "text": "Volver a la Entrada",
+                            "sceneId": "entrada"
+                        }
+                    ]
+                },
+                "pasillo1": {
+                    "title": "Pasillo Principal",
+                    "type": "equirectangular",
+                    "panorama": "pasillo 1.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -5, "yaw": 0,
+                            "type": "scene",
+                            "text": "Volver a la Entrada",
+                            "sceneId": "entrada"
+                        },
+                        {
+                            "pitch": -5, "yaw": 120,
+                            "type": "scene",
+                            "text": "Ir al Baño",
+                            "sceneId": "banio"
+                        },
+                        {
+                            "pitch": -5, "yaw": -120,
+                            "type": "scene",
+                            "text": "Dormitorio Principal",
+                            "sceneId": "dormitorio1"
+                        }
+                    ]
+                },
+                "banio": {
+                    "title": "Baño Completo",
+                    "type": "equirectangular",
+                    "panorama": "baño.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -5, "yaw": 180,
+                            "type": "scene",
+                            "text": "Volver al Pasillo",
+                            "sceneId": "pasillo1"
+                        }
+                    ]
+                },
+                "dormitorio1": {
+                    "title": "Dormitorio Principal",
+                    "type": "equirectangular",
+                    "panorama": "dormitorio principal 1.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": -5, "yaw": 180,
+                            "type": "scene",
+                            "text": "Volver al Pasillo",
+                            "sceneId": "pasillo1"
+                        }
+                    ]
+                }
+            }
+        });
+    </script>
+</body>
+</html>
